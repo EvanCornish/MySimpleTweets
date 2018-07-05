@@ -9,7 +9,7 @@
         android:id="@+id/etTweet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Compose a new tweet..." />
+        android:hint="Compose a new tweet..." />
 
     <Button
         android:id="@+id/bSubmit"
