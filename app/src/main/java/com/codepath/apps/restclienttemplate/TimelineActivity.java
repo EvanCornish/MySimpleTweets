@@ -1,7 +1,10 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Movie;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +31,7 @@ public class TimelineActivity extends AppCompatActivity {
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
+    SwipeRefreshLayout swipeContainer;
     private final int REQUEST_CODE = 7;
 
     @Override
@@ -41,6 +45,17 @@ public class TimelineActivity extends AppCompatActivity {
         tweetAdapter = new TweetAdapter(tweets);
         rvTweets.setLayoutManager(new LinearLayoutManager(this));
         rvTweets.setAdapter(tweetAdapter);
+        swipeContainer = findViewById(R.id.swipeContainer);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                tweetAdapter.clear();
+                populateTimeline();
+                swipeContainer.setRefreshing(false);
+            }
+        });
+
         populateTimeline();
     }
 

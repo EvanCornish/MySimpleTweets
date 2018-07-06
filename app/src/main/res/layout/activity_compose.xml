@@ -3,13 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/timlim"
     tools:context=".ComposeActivity">
 
     <EditText
         android:id="@+id/etTweet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Compose a new tweet..." />
+        android:hint="Compose a new tweet..."
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/light_gray"
+        android:textColorLink="@color/quill" />
 
     <Button
         android:id="@+id/bSubmit"
@@ -17,7 +21,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/etTweet"
-        android:text="Tweet" />
+        android:background="@color/quill"
+        android:text="Tweet"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/tvCharCount"
