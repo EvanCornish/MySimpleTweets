@@ -31,16 +31,21 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
     EditText etTweet;
     TextView tvCharCount;
     Context context;
+    String at;
     int charCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
+        at = getIntent().getStringExtra("At");
         bSubmit = findViewById(R.id.bSubmit);
         bSubmit.setOnClickListener(this);
         context = this;
         etTweet = findViewById(R.id.etTweet);
+        if(at!=null)
+            etTweet.setText("@" + at + " ");
+        etTweet.setSelection(at.length() + 2);
         tvCharCount = findViewById(R.id.tvCharCount);
         tvCharCount.setTextColor(Color.GREEN);
         etTweet.addTextChangedListener(new TextWatcher() {
@@ -52,7 +57,6 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 charCount = 140 - s.length();
-                tvCharCount.setText(Integer.toString(charCount));
                 if (charCount>-1) {
                     tvCharCount.setTextColor(Color.GREEN);
                     bSubmit.setText("Tweet");
