@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,9 +44,10 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
         bSubmit.setOnClickListener(this);
         context = this;
         etTweet = findViewById(R.id.etTweet);
-        if(at!=null)
+        if (at != null) {
             etTweet.setText("@" + at + " ");
-        etTweet.setSelection(at.length() + 2);
+            etTweet.setSelection(at.length() + 2);
+        }
         tvCharCount = findViewById(R.id.tvCharCount);
         tvCharCount.setTextColor(Color.GREEN);
         etTweet.addTextChangedListener(new TextWatcher() {
@@ -57,7 +59,8 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 charCount = 140 - s.length();
-                if (charCount>-1) {
+                tvCharCount.setText(Integer.toString(charCount));
+                if (charCount > -1) {
                     tvCharCount.setTextColor(Color.GREEN);
                     bSubmit.setText("Tweet");
                 } else {
@@ -77,7 +80,7 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if (charCount == 140)
             Toast.makeText(this, "No characters!", Toast.LENGTH_LONG).show();
-        else if (charCount>-1) {
+        else if (charCount > -1) {
             client = TwitterApp.getRestClient(this);
             etTweet = findViewById(R.id.etTweet);
             client.sendTweet(etTweet.getText().toString(), new JsonHttpResponseHandler() {

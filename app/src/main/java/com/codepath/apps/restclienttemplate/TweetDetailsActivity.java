@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +18,7 @@ import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import org.parceler.Parcels;
 
-public class TweetDetailsActivity extends AppCompatActivity {
+public class TweetDetailsActivity extends AppCompatActivity implements View.OnClickListener{
 
     Tweet tweet;
     ImageView ivAvi;
@@ -24,6 +26,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
     TextView tvWhere;
     TextView tvWhat;
     TextView tvWhen;
+    ImageButton ibHome;
 
     final static int REQUEST_CODE = 7;
 
@@ -37,7 +40,9 @@ public class TweetDetailsActivity extends AppCompatActivity {
         tvWhat = findViewById(R.id.tvWhat);
         tvWhen = findViewById(R.id.tvWhen);
         ivAvi = findViewById(R.id.ivAvi);
+        ibHome = findViewById(R.id.ibHome);
 
+        ibHome.setOnClickListener(this);
         tvWho.setText(tweet.user.name);
         tvWhere.setText("@" + tweet.user.screenName);
         tvWhat.setText(tweet.body);
@@ -57,5 +62,11 @@ public class TweetDetailsActivity extends AppCompatActivity {
         intent.putExtra("At",tweet.user.screenName);
         startActivityForResult(intent, REQUEST_CODE);
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(this, TimelineActivity.class);
+        startActivity(intent);
     }
 }

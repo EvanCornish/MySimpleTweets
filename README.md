@@ -50,6 +50,7 @@ The following **additional** features are implemented:
   * [x] User cannot submit blank tweets.
   * [x] User cannot submit tweets over 140 characters.
     * [x] Character count turns from green to red when the user exceeds 140 characters.
+* [x] User can return to the home timeline from the detailed tweet view using the home icon.
 
 ## Video Walkthrough
 
